@@ -11,10 +11,10 @@ export function createSeats(): Seat[] {
         number,
         position: {
           x: (number - 4.5) * 1.5,
-          y: 0.75 + row * 0.18,
+          y: (row - 1) * 0.18,
           z: -3 + row * 2.2,
         },
-        status: "availaible",
+        status: "available",
       });
     }
   }

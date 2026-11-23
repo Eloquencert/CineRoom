@@ -1,4 +1,4 @@
-export type SeatStatus = "availaible" | "selected" | "occupied";
+export type SeatStatus = "available" | "selected" | "occupied";
 
 export interface Position3D {
   x: number;
@@ -39,17 +39,20 @@ export interface CinemaUser {
 
 export interface RoomState {
   roomId: string;
+  roomName: string;
+  ownerId: string | null;
   users: CinemaUser[];
   seats: Seat[];
   player: PlayerState;
 }
 
 export interface ClientToServerEvents {
-  "join-room": (roomId: string, user: CinemaUser) => void;
+  "join-room": (roomId: string, user: CinemaUser, roomName?: string) => void;
   "leave-room": (roomId: string) => void;
-  select_seat: (roomId: string, seatId: string) => void;
-  release_seat: (roomId: string, seatId: string) => void;
-  player_seat: (roomId: string, emoji: string) => void;
+  "update-room-settings": (roomId: string, settings: { roomName: string }) => void;
+  "select-seat": (roomId: string, seatId: string) => void;
+  "release-seat": (roomId: string, seatId: string) => void;
+  "player-state": (roomId: string, player: PlayerState) => void;
   reaction: (roomId: string, emoji: string) => void;
 }
 
